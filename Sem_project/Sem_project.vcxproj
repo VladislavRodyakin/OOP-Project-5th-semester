@@ -136,8 +136,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Components.cpp" />
-    <ClCompile Include="EntityComponentSystem.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />

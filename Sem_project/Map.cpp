@@ -47,7 +47,6 @@ void Map::drawMap() {
 		for (int col = 0; col < m_cols; col++) {
 			m_dst.x = col * TextureManager::w_texture_dimension;
 			m_dst.y = row * TextureManager::h_texture_dimension;
-			//change to patterns usage asap
 			switch (m_map[row][col]) {
 				case 0:
 					TextureManager::Draw(m_clear_space, m_src, m_dst, m_renderer);

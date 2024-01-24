@@ -16,8 +16,6 @@ class Game {
 	SDL_Renderer* m_renderer;
 	GameObject* m_gameObj;
 	Map* m_map;
-	//Manager m_manager;
-	//Entity m_newPlayer;
 	long long cnt;
 	SDL_Event m_event;
 public:

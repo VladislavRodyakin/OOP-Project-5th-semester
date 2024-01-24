@@ -20,16 +20,13 @@ Game::Game(const std::string title, int x_window_pos, int y_window_pos, int wind
 	m_gameObj = nullptr;
 	m_map = nullptr;
 	m_event = SDL_Event();
-	//m_manager = Manager();
-	//m_newPlayer = Entity(m_manager.addEntity());
 }
 Game::~Game() {
 
 }
 
-//SDL_Event Game::m_event;
 Manager m_manager;
-auto& m_newPlayer(m_manager.addEntity()); // unresolvable problms with unique_ptr in Components otherwise
+auto& m_newPlayer(m_manager.addEntity());
 auto& m_wall(m_manager.addEntity());
 
 
@@ -48,7 +45,6 @@ void Game::init() {
 
 	m_isRunning = true;
 
-	//m_gameObj = new GameObject("assets/test.png", m_renderer, 0, 0);
 	m_map = new Map(10, 10, m_renderer);
 	m_newPlayer.addComponent<PositionComponent>(2);
 	m_newPlayer.addComponent<SpriteComponent>("assets/test.png", m_renderer);
@@ -61,7 +57,6 @@ void Game::init() {
 }
 
 void Game::handleEvents() {
-	//SDL_Event event;
 	SDL_PollEvent(&m_event);
 	switch (m_event.type) {
 	case SDL_QUIT:
@@ -75,13 +70,9 @@ void Game::handleEvents() {
 void Game::update() {
 	cnt++;
 	Vector2D playerPos = m_newPlayer.getComponent<PositionComponent>().getPosition();
-	//m_gameObj->update();
 	m_manager.refresh();
 	m_manager.update(&m_event);
 	if (Collision::AABB(m_newPlayer.getComponent<ColliderComponent>().getcollider(), m_wall.getComponent<ColliderComponent>().getcollider())) {
-		/*m_newPlayer.getComponent<PositionComponent>().getscale() = 1;
-		m_newPlayer.getComponent<PositionComponent>().getVelocity() * -1;
-		m_newPlayer.getComponent<PositionComponent>().getscale() = 2;*/
 		m_newPlayer.getComponent<PositionComponent>().getPosition() = playerPos;
 		std::cout << "player hit collider" << std::endl;
 	}
@@ -91,7 +82,6 @@ void Game::render() {
 	SDL_RenderClear(m_renderer);
 	//adding renderables
 	m_map->drawMap();
-	//m_gameObj->render();
 	m_manager.draw(m_renderer);
 
 	SDL_RenderPresent(m_renderer);

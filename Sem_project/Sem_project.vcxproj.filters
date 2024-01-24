@@ -30,12 +30,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="EntityComponentSystem.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Components.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Vector2D.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>

@@ -24,8 +24,7 @@ public:
 	}
 
 	SDL_Rect& getcollider() { return m_collider; }
-	void init() override
-	{
+	void init() override {
 		if (!m_entity->hasComponent<PositionComponent>())
 		{
 			m_entity->addComponent<PositionComponent>();
@@ -39,8 +38,7 @@ public:
 
 	}
 
-	void update(SDL_Event* event) override
-	{
+	void update(SDL_Event* event) override {
 		if (m_tag != "terrain")
 		{
 			m_collider.x = static_cast<int>(m_position->getPosition().x);
@@ -49,13 +47,9 @@ public:
 			m_collider.h = m_position->getheight() * m_position->getscale();
 		}
 
-		/*destR.x = m_collider.x - Game::camera.x;
-		destR.y = m_collider.y - Game::camera.y;*/
 	}
 
-	void draw(SDL_Renderer* renderer) override
-	{
-		//TextureManager::Draw(m_image.texture, m_image.srcR, m_image.dstR, m_renderer);
+	void draw(SDL_Renderer* renderer) override {
 		return;
 	}
 };
