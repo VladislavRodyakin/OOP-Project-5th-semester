@@ -1,4 +1,6 @@
 #pragma once
+#include "SDL.h"
+#include "SDL_image.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -32,8 +34,8 @@ public:
 	void setEntity(Entity* entity) { m_entity = entity; }
 	
 	virtual void init() = 0;
-	virtual void update() = 0;
-	virtual void draw() = 0;
+	virtual void update(SDL_Event* m_event) = 0;
+	virtual void draw(SDL_Renderer* renderer) = 0;
 	virtual ~Component() {};
 };
 
@@ -44,13 +46,14 @@ protected:
 	ComponentArray m_componentArray;
 	ComponentBitSet m_componentBitSet;
 public:
-	void update() {
+	void update(SDL_Event* m_event) {
 		for (auto& c : m_components)
-			c->update();
-		for (auto& c : m_components)
-			c->draw();
+			c->update(m_event);
 	}
-	void draw();
+	void draw(SDL_Renderer* renderer) {
+		for (auto& c : m_components)
+			c->draw(renderer);
+	}
 	bool isActive() const {
 		return m_active;
 	}
@@ -59,7 +62,7 @@ public:
 	}
 
 	template<typename T> bool hasComponent() const {
-		return m_componentBitSet[getComponentTypeID<T>];
+		return m_componentBitSet[getComponentTypeID<T>()];
 	}
 
 	template<typename T, typename... TArgs> T& addComponent(TArgs&&... mArgs) {
@@ -84,13 +87,13 @@ class Manager {
 protected:
 	std::vector<std::unique_ptr<Entity>> m_entities;
 public:
-	void update() {
+	void update(SDL_Event* m_event) {
 		for (auto& entity : m_entities)
-			entity->update();
+			entity->update(m_event);
 	}
-	void draw() {
+	void draw(SDL_Renderer* renderer) {
 		for (auto& entity : m_entities)
-			entity->draw();
+			entity->draw(renderer);
 	}
 	void refresh() {
 		m_entities.erase(std::remove_if(std::begin(m_entities), std::end(m_entities),

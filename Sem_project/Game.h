@@ -16,9 +16,10 @@ class Game {
 	SDL_Renderer* m_renderer;
 	GameObject* m_gameObj;
 	Map* m_map;
-	Manager m_manager;
+	//Manager m_manager;
 	//Entity m_newPlayer;
 	long long cnt;
+	SDL_Event m_event;
 public:
 	Game(const std::string title = "Game", int x_window_pos = SDL_WINDOWPOS_CENTERED, int y_window_pos = SDL_WINDOWPOS_CENTERED, 
 		int window_width = 1600, int window_height = 900, bool fullscreen = false);

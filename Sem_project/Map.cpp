@@ -35,6 +35,13 @@ Map::Map(int rows, int cols, SDL_Renderer* renderer, std::vector<std::vector<int
 
 }
 
+Map::~Map() {
+	SDL_DestroyTexture(m_clear_space);
+	SDL_DestroyTexture(m_white_stars);
+	SDL_DestroyTexture(m_colourful_stars);
+	SDL_DestroyTexture(m_asteroids);
+}
+
 void Map::drawMap() {
 	for (int row = 0; row < m_rows; row++) {
 		for (int col = 0; col < m_cols; col++) {
