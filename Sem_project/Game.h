@@ -4,6 +4,8 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Map.h"
+#include "EntityComponentSystem.h"
+#include "Components.h"
 #include <string>
 
 class Game {
@@ -14,6 +16,8 @@ class Game {
 	SDL_Renderer* m_renderer;
 	GameObject* m_gameObj;
 	Map* m_map;
+	Manager m_manager;
+	//Entity m_newPlayer;
 	long long cnt;
 public:
 	Game(const std::string title = "Game", int x_window_pos = SDL_WINDOWPOS_CENTERED, int y_window_pos = SDL_WINDOWPOS_CENTERED, 

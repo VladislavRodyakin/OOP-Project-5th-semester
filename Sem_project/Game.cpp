@@ -1,4 +1,11 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "GameObject.h"
+#include "Map.h"
+#include "EntityComponentSystem.h"
+#include "Components.h"
+#include "SDL.h"
+#include "SDL_image.h"
 #include <exception>
 
 Game::Game(const std::string title, int x_window_pos, int y_window_pos, int window_width, int window_height, bool fullscreen) : 
@@ -9,10 +16,15 @@ Game::Game(const std::string title, int x_window_pos, int y_window_pos, int wind
 	cnt = 0;
 	m_gameObj = nullptr;
 	m_map = nullptr;
+	m_manager = Manager();
+	//m_newPlayer = Entity(m_manager.addEntity());
 }
 Game::~Game() {
 
 }
+
+Manager manager;
+auto& m_newPlayer(manager.addEntity()); // unresolvable problms with unique_ptr in Components otherwise
 
 void Game::init() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) throw std::exception();
@@ -31,7 +43,7 @@ void Game::init() {
 
 	m_gameObj = new GameObject("assets/test.png", m_renderer, 0, 0);
 	m_map = new Map(10, 10, m_renderer);
-
+	m_newPlayer.addComponent<PositionComponent>();
 }
 
 void Game::handleEvents() {
@@ -49,6 +61,7 @@ void Game::handleEvents() {
 void Game::update() {
 	cnt++;
 	m_gameObj->update();
+	m_manager.update();
 }
 
 void Game::render() {
